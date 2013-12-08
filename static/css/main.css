@@ -1,0 +1,39 @@
+
+
+/* ==========================================================================
+Author's custom styles
+========================================================================== */
+
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-color:white;
+}
+
+/* white background */
+div.container {
+     background: rgba(255, 255, 255, 0.6);
+}
+
+h1.pageheader {
+    font-family: 'Roboto Slab', serif;
+    font-weight:  700;
+}
+
+h2, h3, h4 {
+    font-family: 'Roboto Slab', serif;
+    font-weight:  400;
+}
+
+#wrapper {
+    width: 500px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+

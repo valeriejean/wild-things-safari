@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<head>
+	<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
+	<style>
+	.pic {
+ 		position:absolute;
+	}
+	
+	</style>
+</head>
+
+
+<body>
+
+
+{% for m in media %}
+		<img class="pic" src="{{m.images['standard_resolution'].url}}" alt="{{m.caption.text}}">
+
+<script language="javascript" type="text/javascript">
+  document.oncontextmenu=RightMouseDown;
+  document.onmousedown = mouseDown; 
+
+  function mouseDown(e) {
+      if (e.which==3) {//righClick
+      alert("Disabled - do whatever you like here..");
+   }
+}
+function RightMouseDown() { return false;}
+</script>
+
+<script>
+
+	// $(".pic").on (keyup, function(e){
+	// 	var code= e.which;
+	// 	if (code == 37) { 
+	// 		// $(this).trigger('click');
+	//     	$(this).animate({"left": "-=700px"});
+	//     }
+	//     else if(code == 39) {
+	// 		// $(this).trigger('click'); 
+	//     	$(this).animate({"right": "-=1900px"}, "100");
+	//     }
+	// });
+
+
+	$(".pic").click(function(e){
+
+		// $('[class^="pic"]').on("contextmenu", function(evt) {evt.preventDefault();});
+		
+		if (e.which == 1) { 
+	    	$(this).animate({"left": "-=700px"});
+	    }
+	    else if (e.which == 3) { 
+	  //   	$('.pic').bind('contextmenu', function(){
+   //  			return false;
+			// });
+			e.preventDefault()
+	    	$(this).animate({"right": "-=1900px"}, "100");
+	    }
+	});
+
+// window.oncontextmenu = function() { return false };
+
+</script>
+
+{% endfor %}
+
+
+</body>
+
+
+</html>
