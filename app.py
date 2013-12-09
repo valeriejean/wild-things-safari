@@ -16,32 +16,23 @@ instaConfig = {
 }
 api = InstagramAPI(**instaConfig)
 
-
 @app.route('/')
 def user_photos():
 
-	# thispic = None
-	# piclist = []
-
+	
 	# if instagram info is in session variables, then display user photos
 	if 'instagram_access_token' in session and 'instagram_user' in session:
 		userAPI = InstagramAPI(access_token=session['instagram_access_token'])
 
-		geomedia, next = userAPI.tag_recent_media(tag_name = 'wild')
+			geomedia, next = userAPI.tag_recent_media(tag_name = 'wild')
 
-# 		for media in geomedia: 
-# 			thispic = media
-# 			piclist.append(thispic)
-# #			print len(piclist)
+			templateData = {
+				'size' : request.args.get('size','thumb'),
+				'media' : geomedia
+			}
 
-		templateData = {
-			'size' : request.args.get('size','thumb'),
-			# 'mypics' : piclist
-			'media' : geomedia
-		}
-
-		return render_template('display2.html', **templateData)
-		
+			return render_template('display2.html', **templateData)
+			
 
 	else:
 

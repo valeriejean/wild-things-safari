@@ -15,23 +15,22 @@
 
 <body>
 
+this is {{serial}}
 
 {% for m in media %}
 		<img class="pic" src="{{m.images['standard_resolution'].url}}" alt="{{m.caption.text}}">
 
-<script language="javascript" type="text/javascript">
-  document.oncontextmenu=RightMouseDown;
-  document.onmousedown = mouseDown; 
-
-  function mouseDown(e) {
-      if (e.which==3) {//righClick
-      alert("Disabled - do whatever you like here..");
-   }
-}
-function RightMouseDown() { return false;}
-</script>
-
 <script>
+	(function () {
+
+  		var count = 0;
+		$('.pic').click(function () {
+		    count += 1;
+	    if (count == 20) {
+        	location.reload();
+    	}
+  		});
+	})();
 
 	// $(".pic").on (keyup, function(e){
 	// 	var code= e.which;
@@ -44,25 +43,52 @@ function RightMouseDown() { return false;}
 	//     	$(this).animate({"right": "-=1900px"}, "100");
 	//     }
 	// });
+var serial = 0;
+setInterval(function() {
+	 serial = {{serial}};
+}, 2000);
 
+console.log({{serial}})
 
-	$(".pic").click(function(e){
-
-		// $('[class^="pic"]').on("contextmenu", function(evt) {evt.preventDefault();});
-		
-		if (e.which == 1) { 
-	    	$(this).animate({"left": "-=700px"});
+if ( serial == 1 ) {
+	// $(".pic").(function(e){
+		// if (e.which == 1) { 
+		//$('.pic').animate( {"left": "-=700px"} );
+			console.log("it's 1");
+	}
+//  // else if (e.which == 3) { 
+else if ( serial == 2 ) {
+			// $('[class^="pic"]').on("contextmenu", function(evt) {evt.preventDefault();});
+			// e.preventDefault()
+	//$('.pic').animate( {"right": "-=1900px"}, "100" );
+	console.log("it's 2");
 	    }
-	    else if (e.which == 3) { 
-	  //   	$('.pic').bind('contextmenu', function(){
-   //  			return false;
-			// });
-			e.preventDefault()
-	    	$(this).animate({"right": "-=1900px"}, "100");
-	    }
-	});
+	//});
 
-// window.oncontextmenu = function() { return false };
+
+// $('.pic').click(function(e){
+// 	if (e.which == 1) { 
+// 		$(this).animate( {"left": "-=700px"} );
+// 		console.log(e.which);
+// 	}
+// 	else if (e.which == 2) { 
+// 		// e.preventDefault()
+// 		$(this).animate( {"right": "-=1900px"}, "100" );
+// 		console.log(e.which);
+// 	   	}
+// });
+
+// if ( serial == 1 ) {
+// 	$('.pic').trigger( {'click'} );
+// 	console.log("hi");
+// }
+// else if ( serial == 2 ) {
+// 			// $('[class^="pic"]').on("contextmenu", function(evt) {evt.preventDefault();});
+// 			// e.preventDefault()
+// 	$('.pic').trigger( {'click', 2} );
+// 	    }
+// 	});
+
 
 </script>
 
