@@ -3,6 +3,8 @@
 <head>
 	<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="https://raw.github.com/jquery/jquery-ui/master/tests/jquery.simulate.js"></script>
+
 	
 	<style>
 	.pic {
@@ -43,18 +45,24 @@ this is {{serial}}
 	//     	$(this).animate({"right": "-=1900px"}, "100");
 	//     }
 	// });
-var serial = 0;
-setInterval(function() {
-	 serial = {{serial}};
-}, 2000);
 
-console.log({{serial}})
+// var serial = 0;
+// setInterval(function() {
+// 	 serial = {{serial}};
+// }, 2000);
+
+// console.log({{serial}})
+
+var serial = {{serial}};
 
 if ( serial == 1 ) {
 	// $(".pic").(function(e){
 		// if (e.which == 1) { 
-		//$('.pic').animate( {"left": "-=700px"} );
-			console.log("it's 1");
+		$('.pic').animate( {"left": "-=700px"} );
+		console.log("it's 1");
+		$('.pic').click( function(e){
+    		$(this).animate( {"left": "-=700px"} );
+})
 	}
 //  // else if (e.which == 3) { 
 else if ( serial == 2 ) {
@@ -65,14 +73,14 @@ else if ( serial == 2 ) {
 	    }
 	//});
 
-
+// this works
 // $('.pic').click(function(e){
 // 	if (e.which == 1) { 
 // 		$(this).animate( {"left": "-=700px"} );
 // 		console.log(e.which);
 // 	}
 // 	else if (e.which == 2) { 
-// 		// e.preventDefault()
+// 		e.preventDefault()
 // 		$(this).animate( {"right": "-=1900px"}, "100" );
 // 		console.log(e.which);
 // 	   	}

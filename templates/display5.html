@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<head>
+	<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
+	<style>
+	.pic {
+ 		position:absolute;
+	}
+	
+	</style>
+</head>
+
+
+<body>
+
+{% for m in media %}
+		<img class="pic" src="{{m.images['standard_resolution'].url}}" alt="{{m.caption.text}}">
+{% endfor %}
+
+ <script>
+$(window).load(function(){
+
+	$(document).keyup(function(e){
+		console.log(e);
+		if (e.keyCode== '81') {
+			animatePic('left')
+		} else if (e.keyCode=='87')
+			animatePic('right');
+		})
+
+	$('.pic').click(function(e){
+		  if (e.which == 1) { 
+			$(this).animate( {"left": "-=700px"} );
+		 }
+	});
+
+	$('.pic').click(function(e) { 
+			//e.preventDefault()
+			if (e.which == 3) {
+			$(this).animate( {"right": "-=1900px"}, "100" );
+		    }
+	});
+
+	var animatePic = function(direction) {
+
+		if (direction=='right') {
+			animateDirection ={"right": "-=1900px"}
+		} else {
+			animateDirection={"left": "-=1900px"}
+		}
+
+		//save all images of pic class to a variable
+		var currImages = $('.pic');
+
+		//image at the top of the stack (drawn last) is firstImage
+		firstImage = currImages.slice(-1)[0];
+
+		jQuery(firstImage).animate(
+			animateDirection, "9000"
+		, function(){ 
+			jQuery(firstImage).remove(); 
+			console.log(currImages.length)
+		} )
+
+		if (currImages.length == 0) {
+		location.reload();
+		}
+
+	}
+
+
+	
+
+});
+</script>
+
+</body>
+</html>

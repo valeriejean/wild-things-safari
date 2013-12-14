@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<head>
+	<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
+	<style>
+	.pic {
+ 		position:absolute;
+	}
+	
+	</style>
+</head>
+
+
+<body>
+
+{% for m in media %}
+		<img class="pic" src="{{m.images['standard_resolution'].url}}" alt="{{m.caption.text}}">
+{% endfor %}
+ <script>
+
+$(window).load(function(){
+
+// count number of clicks, reload a new set of images after 20 
+  	var count = 0;
+	(function clickCount() {
+		$('.pic').click(function () {
+		    count += 1;
+		    console.log(count);
+	    if (count == 20) {
+        	location.reload();
+    	}
+  		});
+	})();
+
+// //crate javascript variable from jinja serial reading
+// // var serial = {{serial}};
+// //save all images of pic class to a variable
+// var currImages = $('.pic');
+// //image at the top of the stack (drawn last) is firstImage
+// firstImage = currImages.slice(-1)[0];	
+
+// $('#leftbutton').click(function(){
+// 	console.log('clicking button')
+// 	$(firstImage).animate( 
+// 		{left: "-=700px"}, 'slow', 
+// 		function() {
+// 			//callback - remove from DOM
+// 			$(firstImage).remove();
+// 			console.log('destroyed first image')
+// 			console.log('now current images count is' + currImages.length);
+// 			console.log('number of clicks is' + count)
+// 			});
+// })
+
+// // if (serial == 1 ) { 
+// // 	console.log('serial is 1')
+// // 	$('#leftbutton').trigger({
+// // 		type: 'click'
+// // 	});
+// // 	console.log('trigger initiating click')
+// // }
+
+// //keypress navigation on 'v'
+window.onKeyPress = function(e) { 
+	alert(e.keyCode);
+	console.log(e)
+	if (e.keyCode == 118) {
+	$(this).animate( {"right": "-=1900px"}, "100" );
+    }
+};
+
+$(document).keyup(function(e){
+	console.log(e);
+	if (e.keyCode==86) {
+		animatePic('right')
+	} else if (e.keyCode=='118')
+		animatePic('left');
+	}
+})
+
+var animatePic = function(direction) {
+
+	if (direction=='right') {
+		animateDirection ={"right": "-=1900px"}
+
+	} else {
+		animateDirection={"left": "-=1900px"}
+	}
+ 	//save all images of pic class to a variable
+	var currImages = $('.pic');
+	//image at the top of the stack (drawn last) is firstImage
+	firstImage = currImages.slice(-1)[0];
+	jQuery(firstImage).animate(
+		animateDirection, "100"
+	, function(){ 
+		jQuery(this).remove(); 
+	})
+
+}
+//pure click navigation
+// $('.pic').click(function(e){
+// 		  if (e.which == 1) { 
+// 			$(this).animate( {"left": "-=700px"} );
+// 		 }
+// 	});
+
+	// $('.pic').click(function(e) { 
+	// 		if (e.which == 3) {
+	// 		$(this).animate( {"right": "-=1900px"}, "100" );
+	// 	    }
+	// });
+
+
+//ajax attempts
+// setInterval(checkSerial, 5);
+
+// function checkSerial() {
+
+// 	console.log('checking serial')
+
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: 'localhost:5000/',
+// 		data: inByte,
+// 		dataType: String,
+// 		success: function(data){
+// 			console.log('received');
+// 			console.log(data);
+// 		},
+// 		error: function(err) {
+// 			console.error(err);
+// 		}
+// 		} 
+// 	});
+	
+// 	if (serial == 1 ) { 
+// 		console.log('serial is 1')
+// 		$('#leftbutton').trigger({
+// 			type: 'click'
+// 		});
+// 		console.log('trigger initiating click')
+// 	}
+
+// 	else if (serial == 2) {
+// 	console.log('serial is 2')
+// 	}
+
+// }
+
+// if ( serial == 1) {
+// 	console.log('triggering')
+// 	clickFirst(firstImage)
+// }
+
+// function clickFirst(image) {
+// console.log('clickfirst')	
+// 	$('.pic').trigger(
+// 		'click'
+// 		);
+// }
+
+
+
+// $(document).on('contextmenu', function(e) {
+//     if (!$(e.target).is(".pic"))
+//        return false;
+
+//     e.preventDefault();
+//     $('.pic').click(function(e){
+// });
+
+
+//  animate on click
+// $('.pic').click(function(e){
+// 	if (e.which == 1) { 
+// 		$(this).animate( 
+// 			{left: "-=700px"}, 'slow', 
+// 			function() {
+// 				//callback - remove from DOM
+// 				// console.log('removing firstimage');
+// 				// $(firstImage).remove();
+// 				});
+// 	}
+// 	else if (e.which == 2) {
+// 		e.preventDefault(); 
+// 		$(this).animate( {"right": "-=1900px"}, "100" );
+// 	   	}
+// });
+
+
+//trigger to simulate a click via serial signal
+// if ( serial == 1 ) {
+// 	$('.pic').trigger({
+// 		type: 'click', 
+// 		which: 2
+// 	});
+// 	console.log("it's 2");
+// 	}
+
+// else if ( serial == 3 ) {
+// 	console.log("it's 3");
+// 	    }
+
+// combined
+// if ( serial == 1 ) {
+
+// 	$('.pic').click(function(e){
+//     $('.pic:last').animate( {"left": "-=700px"}, "slow" );
+// 	})
+
+// 	$('.pic').trigger({
+// 		type: 'click', 
+// 		which: 1 
+// 	});	
+// }
+
+});
+
+</script>
+
+
+
+</body>
+
+
+</html>

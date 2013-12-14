@@ -17,25 +17,25 @@ instaConfig = {
 api = InstagramAPI(**instaConfig)
 
 @app.route('/')
-def user_photos():
 
+def user_photos():
+	# ser = serial.Serial('COM3', 9600)
+	# inByte = ser.read()	
 	
 	# if instagram info is in session variables, then display user photos
 	if 'instagram_access_token' in session and 'instagram_user' in session:
 		userAPI = InstagramAPI(access_token=session['instagram_access_token'])
 
-			geomedia, next = userAPI.tag_recent_media(tag_name = 'wild')
+		geomedia, next = userAPI.tag_recent_media(tag_name = 'wild')
 
-			templateData = {
-				'size' : request.args.get('size','thumb'),
-				'media' : geomedia
-			}
-
-			return render_template('display2.html', **templateData)
+		templateData = {
+			'size' : request.args.get('size','thumb'),
+			'media' : geomedia,
+			'serial' : inByte
+		}
+		return render_template('display5.html', **templateData)
 			
-
 	else:
-
 		return redirect('/connect')
 	
 # Redirect users to Instagram for login

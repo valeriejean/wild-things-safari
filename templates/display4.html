@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<head>
+	<!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	
+	<style>
+	.pic {
+ 		position:absolute;
+	}
+	</style>
+</head>
+
+
+<body>
+
+{% for m in media %}
+		<img class="pic" src="{{m.images['standard_resolution'].url}}" alt="{{m.caption.text}}">
+
+<script>
+
+$(window).load(function(){
+
+	(function () {
+
+  		var count = 0;
+		$('.pic').click(function () {
+		    count += 1;
+	    if (count == 20) {
+        	location.reload();
+    	}
+  		});
+	})();
+
+	$('.pic').click(function(e){
+		  if (e.which == 1) { 
+			$(this).animate( {"left": "-=700px"} );
+		 }
+	});
+
+	$('.pic').click(function(e) { 
+			//e.preventDefault()
+			if (e.which == 3) {
+			$(this).animate( {"right": "-=1900px"}, "100" );
+		    }
+	});
+
+
+});
+</script>
+
+{% endfor %}
+
+
+</body>
+
+
+</html>
